@@ -1,5 +1,13 @@
 # COMP-1110-Final-Code
 
+## Topic A
+
+### Team Members
+| Name | UID |
+| --- | --- |
+| Hon Chi San | 3036519875 |
+
+
 Programming language: Python
 
 Execution environment: Linux
