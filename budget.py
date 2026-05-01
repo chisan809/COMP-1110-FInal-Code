@@ -9,6 +9,7 @@ CATEGORIES_FILE = "budget_categories.csv"
 LIMIT_FILE      = "budget_limit.txt"
 CATEGORY_BUDGETS_FILE = "category_budgets.csv"
 RECURRING_FILE = "recurring_transactions.csv"
+CATEGORY_BUDGETS_FILE = "category_budgets.csv"
 WARNING_THRESHOLD = 0.85  # warn at 85% of limit
 
 FIELDNAMES = ["date", "type", "category", "amount", "description"]
@@ -135,6 +136,43 @@ def save_category_budgets(category_budgets):
                 "budget": budget
             })
 
+# Add rollover budget file functions
+def load_rollovers():
+    rollovers = {}
+
+    if not os.path.exists(ROLLOVER_FILE):
+        return rollovers
+
+    with open(ROLLOVER_FILE, newline="", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+
+        for row in reader:
+            try:
+                month = row["month"].strip()
+                category = row["category"].strip()
+                rollover = float(row["rollover"])
+
+                if month and category:
+                    rollovers[(month, category)] = rollover
+
+            except Exception:
+                pass
+
+    return rollovers
+
+
+def save_rollovers(rollovers):
+    with open(ROLLOVER_FILE, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=["month", "category", "rollover"])
+        writer.writeheader()
+
+        for (month, category), rollover in rollovers.items():
+            writer.writerow({
+                "month": month,
+                "category": category,
+                "rollover": rollover
+            })
+
 # ── Helpers ───────────────────────────────────────────────────────────────────
 # Print a separator line
 def separator(char="─", width=52):
@@ -226,6 +264,15 @@ def check_global_limit(transactions, limit):
               f"{ratio*100:.0f}% of your ${limit:.2f} limit "
               f"(${spent:.2f} spent in {ym})")
 
+# Get the next month in YYYY-MM format
+def get_next_month(month):
+    year, month_num = map(int, month.split("-"))
+
+    if month_num == 12:
+        return f"{year + 1}-01"
+    else:
+        return f"{year}-{month_num + 1:02d}"
+
 # Add the text-based expense chart function
 def print_expense_chart(cat_totals, max_bar_length=30):
     if not cat_totals:
@@ -296,7 +343,7 @@ def add_transaction(transactions, categories, limit):
         check_global_limit(transactions, limit)
 
 # Print monthly report
-def monthly_report(transactions, category_budgets):
+def monthly_report(transactions, category_budgets, rollovers):
     header("Monthly Report")
 
     if not transactions:
@@ -350,20 +397,30 @@ def monthly_report(transactions, category_budgets):
             separator("-", 70)
 
             all_categories = set(cat_totals.keys()) | set(category_budgets.keys())
+            for m, category in rollovers.keys():
+                if m == ym:
+                    all_categories.add(category)
             overspent_categories = []
 
             for cat in sorted(all_categories, key=lambda x: -cat_totals.get(x, 0)):
                 spent = cat_totals.get(cat, 0)
-                budget = category_budgets.get(cat)
-
-                if budget is None:
+                base_budget = category_budgets.get(cat)
+                rollover = rollovers.get((ym, cat), 0)
+                
+                if base_budget is None and rollover == 0:
                     budget_text = "Not set"
                     remaining_text = "-"
                 else:
-                    remaining = budget - spent
-                    budget_text = f"${budget:.2f}"
+                    available_budget = (base_budget or 0) + rollover
+                    remaining = available_budget - spent
+                    
+                    if rollover == 0:
+                        budget_text = f"${available_budget:.2f}"
+                    else:
+                        budget_text = f"${available_budget:.2f}"
+                        
                     remaining_text = f"${remaining:.2f}"
-
+                    
                     if remaining < 0:
                         overspent_categories.append((cat, abs(remaining)))
 
@@ -827,6 +884,63 @@ def apply_recurring_transactions(transactions, categories, limit):
 
     if added_count > 0:
         check_global_limit(transactions, limit)
+
+# Add rollover budgeting function
+def close_month_and_rollover(transactions, category_budgets, rollovers):
+    header("Close Month and Rollover")
+
+    month = input("  Enter the month to close (YYYY-MM): ").strip()
+
+    try:
+        datetime.strptime(month, "%Y-%m")
+    except ValueError:
+        print("  Invalid month format. Use YYYY-MM.\n")
+        return
+
+    next_month = get_next_month(month)
+
+    cat_totals = defaultdict(float)
+
+    for t in transactions:
+        if t["type"] == "expense" and t["date"][:7] == month:
+            cat_totals[t["category"]] += t["amount"]
+
+    all_categories = set(category_budgets.keys()) | set(cat_totals.keys())
+
+    for m, category in rollovers.keys():
+        if m == month:
+            all_categories.add(category)
+
+    if not all_categories:
+        print("  No category budgets or expenses found for this month.\n")
+        return
+
+    print()
+    print(f"  Closing month: {month}")
+    print(f"  Rollover will be applied to: {next_month}")
+    separator("-", 80)
+    print(f"  {'Category':<18} {'Budget':>10} {'Old Roll':>10} {'Spent':>10} {'New Roll':>10}")
+    separator("-", 80)
+
+    for category in sorted(all_categories):
+        base_budget = category_budgets.get(category, 0)
+        old_rollover = rollovers.get((month, category), 0)
+        available = base_budget + old_rollover
+        spent = cat_totals.get(category, 0)
+
+        new_rollover = available - spent
+
+        rollovers[(next_month, category)] = new_rollover
+
+        print(f"  {category:<18} ${base_budget:>9.2f} ${old_rollover:>9.2f} "
+              f"${spent:>9.2f} ${new_rollover:>9.2f}")
+
+    separator("-", 80)
+
+    save_rollovers(rollovers)
+
+    print(f"\n  ✓ Rollover balances saved for {next_month}.\n")
+
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 
