@@ -9,7 +9,7 @@ CATEGORIES_FILE = "budget_categories.csv"
 LIMIT_FILE      = "budget_limit.txt"
 CATEGORY_BUDGETS_FILE = "category_budgets.csv"
 RECURRING_FILE = "recurring_transactions.csv"
-CATEGORY_BUDGETS_FILE = "category_budgets.csv"
+ROLLOVER_FILE = "rollover_balances.csv"
 WARNING_THRESHOLD = 0.85  # warn at 85% of limit
 
 FIELDNAMES = ["date", "type", "category", "amount", "description"]
@@ -987,7 +987,7 @@ def main():
             add_transaction(transactions, categories, limit_holder[0])
         elif choice == "2":
             print()
-            monthly_report(transactions, category_budgets)
+            monthly_report(transactions, category_budgets, rollovers)
         elif choice == "3":
             print()
             view_transactions(transactions)
