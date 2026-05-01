@@ -7,7 +7,7 @@
 | --- | --- |
 | Hon Chi San | 3036519875 |
 | Cheung Chun Yu | xxxxxxxxxx |
-| Seto Ho Yeung | xxxxxxxxxx |
+| Seto Ho Yeung | 3036665777 |
 | Kwok Hoi | xxxxxxxxxx |
 
 
