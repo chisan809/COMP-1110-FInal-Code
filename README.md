@@ -4,7 +4,9 @@ Programming language: Python
 
 Execution environment: Linux
 
-Compilation: Type "***python3 budget.py***" in the terminal
+Compilation: 
+- Download the ZIP containing the files, and extract it onto your desktop, or any other working directory.
+- In the terminal, navigate to the working directory containing the files, and run the command '***python3 budget.py***'
 
 ### Files
 
