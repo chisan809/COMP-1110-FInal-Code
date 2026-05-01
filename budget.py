@@ -13,7 +13,7 @@ FIELDNAMES = ["date", "type", "category", "amount", "description"]
 
 
 # ── Data I/O ──────────────────────────────────────────────────────────────────
-
+# Read "budget_data.csv" and return a list of transactions
 def load_transactions():
     transactions = []
     if not os.path.exists(DATA_FILE):
@@ -25,14 +25,14 @@ def load_transactions():
             transactions.append(row)
     return transactions
 
-
+# Write the list of transactions to "budget_data.csv"
 def save_transactions(transactions):
     with open(DATA_FILE, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=FIELDNAMES)
         writer.writeheader()
         writer.writerows(transactions)
 
-
+# Read "budget_categories.csv" and return a list of categories
 def load_categories():
     if not os.path.exists(CATEGORIES_FILE):
         return []
@@ -40,14 +40,14 @@ def load_categories():
         reader = csv.reader(f)
         return [row[0] for row in reader if row]
 
-
+# Write the list of categories to "budget_categories.csv"
 def save_categories(categories):
     with open(CATEGORIES_FILE, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         for cat in categories:
             writer.writerow([cat])
 
-
+# Read "budget_limit.txt" and return the limit as a float, or None if it doesn't exist
 def load_limit():
     if not os.path.exists(LIMIT_FILE):
         return None
@@ -58,24 +58,24 @@ def load_limit():
         except ValueError:
             return None
 
-
+# Write the limit to "budget_limit.txt"
 def save_limit(limit):
     with open(LIMIT_FILE, "w", encoding="utf-8") as f:
         f.write("" if limit is None else str(limit))
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
-
+# Print a separator line
 def separator(char="─", width=52):
     print(char * width)
 
-
+# Print a header
 def header(title):
     separator("═")
     print(f"  {title}")
     separator("═")
 
-
+# Prompt the user for a float value
 def prompt_float(msg):
     while True:
         try:
@@ -87,7 +87,7 @@ def prompt_float(msg):
         except ValueError:
             print("  Invalid number. Try again.")
 
-
+# Prompt the user for a choice from a list of choices
 def prompt_choice(msg, choices):
     choices_lower = [c.lower() for c in choices]
     while True:
@@ -96,7 +96,7 @@ def prompt_choice(msg, choices):
             return val
         print(f"  Choose from: {', '.join(choices)}")
 
-
+# Pick an existing category or create a new one
 def pick_or_create_category(categories):
     """Let the user pick an existing category or create a new one."""
     if categories:
@@ -132,7 +132,7 @@ def pick_or_create_category(categories):
         print(f"  ✓ Category '{name}' saved.")
         return name
 
-
+# Return the total expenses for the current month
 def total_expenses_this_month(transactions):
     ym = datetime.now().strftime("%Y-%m")
     return sum(
@@ -140,7 +140,7 @@ def total_expenses_this_month(transactions):
         if t["type"] == "expense" and t["date"][:7] == ym
     )
 
-
+# Print warning if the global limit is exceeded or close to limit
 def check_global_limit(transactions, limit):
     if limit is None:
         return
@@ -157,7 +157,7 @@ def check_global_limit(transactions, limit):
 
 
 # ── Features ──────────────────────────────────────────────────────────────────
-
+# Add a new transaction
 def add_transaction(transactions, categories, limit):
     header("Add Transaction")
 
@@ -201,7 +201,7 @@ def add_transaction(transactions, categories, limit):
     if t_type == "expense":
         check_global_limit(transactions, limit)
 
-
+# Print monthly report
 def monthly_report(transactions):
     header("Monthly Report")
 
@@ -260,7 +260,7 @@ def monthly_report(transactions):
             separator("-", 42)
         print()
 
-
+# Print transaction history
 def view_transactions(transactions):
     header("Transaction History")
 
@@ -278,7 +278,7 @@ def view_transactions(transactions):
     separator("-", 65)
     print(f"  Total records: {len(transactions)}\n")
 
-
+# Set, update or remove the monthly limit
 def manage_limit(transactions, limit_holder):
     """limit_holder is a list of one element so we can mutate it."""
     header("Budget Limit")
@@ -319,7 +319,7 @@ def manage_limit(transactions, limit_holder):
     else:
         print("  Invalid option.\n")
 
-
+# View, add or delete categories
 def manage_categories(categories):
     header("Manage Categories")
 
@@ -375,7 +375,7 @@ def manage_categories(categories):
 
 
 # ── Main ──────────────────────────────────────────────────────────────────────
-
+# The primary loop
 def main():
     transactions = load_transactions()
     categories   = load_categories()
