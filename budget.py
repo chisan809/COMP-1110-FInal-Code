@@ -7,6 +7,7 @@ from collections import defaultdict
 DATA_FILE       = "budget_data.csv"
 CATEGORIES_FILE = "budget_categories.csv"
 LIMIT_FILE      = "budget_limit.txt"
+CATEGORY_BUDGETS_FILE = "category_budgets.csv"
 WARNING_THRESHOLD = 0.85  # warn at 85% of limit
 
 FIELDNAMES = ["date", "type", "category", "amount", "description"]
@@ -63,6 +64,40 @@ def save_limit(limit):
     with open(LIMIT_FILE, "w", encoding="utf-8") as f:
         f.write("" if limit is None else str(limit))
 
+# Add category-based budget file functions
+def load_category_budgets():
+    category_budgets = {}
+
+    if not os.path.exists(CATEGORY_BUDGETS_FILE):
+        return category_budgets
+
+    with open(CATEGORY_BUDGETS_FILE, newline="", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+
+        for row in reader:
+            try:
+                category = row["category"].strip()
+                budget = float(row["budget"])
+
+                if category and budget >= 0:
+                    category_budgets[category] = budget
+
+            except Exception:
+                pass
+
+    return category_budgets
+
+
+def save_category_budgets(category_budgets):
+    with open(CATEGORY_BUDGETS_FILE, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=["category", "budget"])
+        writer.writeheader()
+
+        for category, budget in category_budgets.items():
+            writer.writerow({
+                "category": category,
+                "budget": budget
+            })
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 # Print a separator line
@@ -224,7 +259,7 @@ def add_transaction(transactions, categories, limit):
         check_global_limit(transactions, limit)
 
 # Print monthly report
-def monthly_report(transactions):
+def monthly_report(transactions, category_budgets):
     header("Monthly Report")
 
     if not transactions:
@@ -270,16 +305,40 @@ def monthly_report(transactions):
         print(f"  {'Total Expenses:':<25} ${expense_total:>10.2f}")
         print(f"  {'Net:':<25} ${income_total - expense_total:>10.2f}")
 
-        if cat_totals:
+        if cat_totals or category_budgets:
             print()
-            print("  Expense by Category")
-            separator("-", 42)
-            print(f"  {'Category':<22} {'Amount':>10}  {'% of Exp':>8}")
-            separator("-", 42)
-            for cat, total in sorted(cat_totals.items(), key=lambda x: -x[1]):
-                pct = (total / expense_total * 100) if expense_total else 0
-                print(f"  {cat:<22} ${total:>9.2f}  {pct:>7.1f}%")
-            separator("-", 42)
+            print("  Expense by Category Budget")
+            separator("-", 70)
+            print(f"  {'Category':<18} {'Spent':>10} {'Budget':>12} {'Remaining':>12}")
+            separator("-", 70)
+
+            all_categories = set(cat_totals.keys()) | set(category_budgets.keys())
+            overspent_categories = []
+
+            for cat in sorted(all_categories, key=lambda x: -cat_totals.get(x, 0)):
+                spent = cat_totals.get(cat, 0)
+                budget = category_budgets.get(cat)
+
+                if budget is None:
+                    budget_text = "Not set"
+                    remaining_text = "-"
+                else:
+                    remaining = budget - spent
+                    budget_text = f"${budget:.2f}"
+                    remaining_text = f"${remaining:.2f}"
+
+                    if remaining < 0:
+                        overspent_categories.append((cat, abs(remaining)))
+
+                print(f"  {cat:<18} ${spent:>9.2f} {budget_text:>12} {remaining_text:>12}")
+
+            separator("-", 70)
+
+            if overspent_categories:
+                print()
+                for cat, amount in overspent_categories:
+                    print(f"  ⚠ {cat} exceeded its category budget by ${amount:.2f}")
+
         print()
 
 # Print transaction history
@@ -340,6 +399,68 @@ def manage_limit(transactions, limit_holder):
         pass
     else:
         print("  Invalid option.\n")
+
+# Add category-based budget management function
+def manage_category_budgets(categories, category_budgets):
+    header("Manage Category Budgets")
+
+    while True:
+        print("  Current Category Budgets")
+        separator("-", 52)
+
+        if not category_budgets:
+            print("  No category budgets set yet.")
+        else:
+            for category, budget in category_budgets.items():
+                print(f"  {category:<25} ${budget:>10.2f}")
+
+        separator("-", 52)
+        print("  1. Set / update category budget")
+        print("  2. Remove category budget")
+        print("  0. Back")
+
+        choice = input("\n  Choice: ").strip()
+
+        if choice == "0":
+            break
+
+        elif choice == "1":
+            category = pick_or_create_category(categories)
+            budget = prompt_float("  Category budget amount: $")
+
+            category_budgets[category] = budget
+            save_category_budgets(category_budgets)
+
+            print(f"  ✓ Budget for '{category}' set to ${budget:.2f}\n")
+
+        elif choice == "2":
+            if not category_budgets:
+                print("  No category budgets to remove.\n")
+                continue
+
+            budget_categories = list(category_budgets.keys())
+
+            for i, category in enumerate(budget_categories, 1):
+                print(f"    {i}. {category} - ${category_budgets[category]:.2f}")
+
+            raw = input("  Select number to remove: ").strip()
+
+            try:
+                idx = int(raw) - 1
+
+                if 0 <= idx < len(budget_categories):
+                    removed = budget_categories[idx]
+                    del category_budgets[removed]
+                    save_category_budgets(category_budgets)
+                    print(f"  ✓ Removed budget for '{removed}'.\n")
+                else:
+                    print("  Invalid choice.\n")
+
+            except ValueError:
+                print("  Invalid choice.\n")
+
+        else:
+            print("  Invalid option.\n")
 
 # View, add or delete categories
 def manage_categories(categories):
@@ -507,6 +628,7 @@ def main():
     transactions = load_transactions()
     categories   = load_categories()
     limit_holder = [load_limit()]   # mutable wrapper
+    category_budgets = load_category_budgets()
 
     header("Personal Budget Tracker")
     print(f"  Loaded {len(transactions)} transaction(s).")
