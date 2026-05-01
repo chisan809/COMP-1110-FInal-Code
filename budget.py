@@ -1,0 +1,429 @@
+import csv
+import os
+import sys
+from datetime import datetime
+from collections import defaultdict
+
+DATA_FILE       = "budget_data.csv"
+CATEGORIES_FILE = "budget_categories.csv"
+LIMIT_FILE      = "budget_limit.txt"
+WARNING_THRESHOLD = 0.85  # warn at 85% of limit
+
+FIELDNAMES = ["date", "type", "category", "amount", "description"]
+
+
+# ── Data I/O ──────────────────────────────────────────────────────────────────
+
+def load_transactions():
+    transactions = []
+    if not os.path.exists(DATA_FILE):
+        return transactions
+    with open(DATA_FILE, newline="", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            row["amount"] = float(row["amount"])
+            transactions.append(row)
+    return transactions
+
+
+def save_transactions(transactions):
+    with open(DATA_FILE, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=FIELDNAMES)
+        writer.writeheader()
+        writer.writerows(transactions)
+
+
+def load_categories():
+    if not os.path.exists(CATEGORIES_FILE):
+        return []
+    with open(CATEGORIES_FILE, newline="", encoding="utf-8") as f:
+        reader = csv.reader(f)
+        return [row[0] for row in reader if row]
+
+
+def save_categories(categories):
+    with open(CATEGORIES_FILE, "w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        for cat in categories:
+            writer.writerow([cat])
+
+
+def load_limit():
+    if not os.path.exists(LIMIT_FILE):
+        return None
+    with open(LIMIT_FILE, encoding="utf-8") as f:
+        content = f.read().strip()
+        try:
+            return float(content)
+        except ValueError:
+            return None
+
+
+def save_limit(limit):
+    with open(LIMIT_FILE, "w", encoding="utf-8") as f:
+        f.write("" if limit is None else str(limit))
+
+
+# ── Helpers ───────────────────────────────────────────────────────────────────
+
+def separator(char="─", width=52):
+    print(char * width)
+
+
+def header(title):
+    separator("═")
+    print(f"  {title}")
+    separator("═")
+
+
+def prompt_float(msg):
+    while True:
+        try:
+            val = float(input(msg).strip())
+            if val <= 0:
+                print("  Please enter a positive number.")
+                continue
+            return val
+        except ValueError:
+            print("  Invalid number. Try again.")
+
+
+def prompt_choice(msg, choices):
+    choices_lower = [c.lower() for c in choices]
+    while True:
+        val = input(msg).strip().lower()
+        if val in choices_lower:
+            return val
+        print(f"  Choose from: {', '.join(choices)}")
+
+
+def pick_or_create_category(categories):
+    """Let the user pick an existing category or create a new one."""
+    if categories:
+        print("  Existing categories:")
+        for i, cat in enumerate(categories, 1):
+            print(f"    {i}. {cat}")
+        print(f"    {len(categories) + 1}. + Create new category")
+        while True:
+            raw = input("  Select number: ").strip()
+            try:
+                idx = int(raw) - 1
+                if 0 <= idx < len(categories):
+                    return categories[idx]
+                if idx == len(categories):
+                    break   # fall through to create-new
+            except ValueError:
+                pass
+            print("  Invalid choice.")
+    else:
+        print("  No categories yet. Creating a new one.")
+
+    # Create new
+    while True:
+        name = input("  New category name: ").strip()
+        if not name:
+            print("  Name cannot be empty.")
+            continue
+        if name in categories:
+            print(f"  '{name}' already exists.")
+            continue
+        categories.append(name)
+        save_categories(categories)
+        print(f"  ✓ Category '{name}' saved.")
+        return name
+
+
+def total_expenses_this_month(transactions):
+    ym = datetime.now().strftime("%Y-%m")
+    return sum(
+        t["amount"] for t in transactions
+        if t["type"] == "expense" and t["date"][:7] == ym
+    )
+
+
+def check_global_limit(transactions, limit):
+    if limit is None:
+        return
+    spent = total_expenses_this_month(transactions)
+    ratio = spent / limit
+    ym = datetime.now().strftime("%Y-%m")
+    if ratio >= 1.0:
+        print(f"\n  ⚠  LIMIT EXCEEDED: Total expenses this month "
+              f"(${spent:.2f}) have exceeded your limit of ${limit:.2f}!")
+    elif ratio >= WARNING_THRESHOLD:
+        print(f"\n  ⚠  WARNING: Total expenses this month are at "
+              f"{ratio*100:.0f}% of your ${limit:.2f} limit "
+              f"(${spent:.2f} spent in {ym})")
+
+
+# ── Features ──────────────────────────────────────────────────────────────────
+
+def add_transaction(transactions, categories, limit):
+    header("Add Transaction")
+
+    t_type = prompt_choice("  Type (income/expense): ", ["income", "expense"])
+
+    print()
+    category = pick_or_create_category(categories)
+
+    amount = prompt_float("  Amount: $")
+
+    print("  Description (optional, press Enter to skip): ", end="")
+    description = input().strip()
+
+    today = datetime.now().strftime("%Y-%m-%d")
+    print(f"\n  Date options:")
+    print(f"    1. Today ({today})")
+    print(f"    2. Enter a custom date (format: YYYY-MM-DD)")
+    date_choice = prompt_choice("  Choose (1/2): ", ["1", "2"])
+    if date_choice == "1":
+        date_str = today
+    else:
+        while True:
+            raw = input("  Enter date (YYYY-MM-DD): ").strip()
+            try:
+                datetime.strptime(raw, "%Y-%m-%d")
+                date_str = raw
+                break
+            except ValueError:
+                print("  Invalid format. Please use YYYY-MM-DD (e.g. 2026-03-15).")
+    transactions.append({
+        "date": date_str,
+        "type": t_type,
+        "category": category,
+        "amount": amount,
+        "description": description,
+    })
+
+    print(f"\n  ✓ Added: [{t_type.upper()}] ${amount:.2f} — {category}"
+          + (f" ({description})" if description else ""))
+
+    if t_type == "expense":
+        check_global_limit(transactions, limit)
+
+
+def monthly_report(transactions):
+    header("Monthly Report")
+
+    if not transactions:
+        print("  No transactions recorded yet.\n")
+        return
+
+    months = sorted({t["date"][:7] for t in transactions}, reverse=True)
+
+    print("  Available months:")
+    for i, m in enumerate(months, 1):
+        print(f"    {i}. {m}")
+    print("    0. All months")
+
+    while True:
+        choice = input("\n  Select (0 / number): ").strip()
+        if choice == "0":
+            selected = months
+            break
+        try:
+            idx = int(choice) - 1
+            if 0 <= idx < len(months):
+                selected = [months[idx]]
+                break
+        except ValueError:
+            pass
+        print("  Invalid choice.")
+
+    for ym in selected:
+        separator()
+        print(f"  Period: {ym}")
+        separator()
+
+        month_txns = [t for t in transactions if t["date"][:7] == ym]
+        income_total  = sum(t["amount"] for t in month_txns if t["type"] == "income")
+        expense_total = sum(t["amount"] for t in month_txns if t["type"] == "expense")
+
+        cat_totals = defaultdict(float)
+        for t in month_txns:
+            if t["type"] == "expense":
+                cat_totals[t["category"]] += t["amount"]
+
+        print(f"  {'Total Income:':<25} ${income_total:>10.2f}")
+        print(f"  {'Total Expenses:':<25} ${expense_total:>10.2f}")
+        print(f"  {'Net:':<25} ${income_total - expense_total:>10.2f}")
+
+        if cat_totals:
+            print()
+            print("  Expense by Category")
+            separator("-", 42)
+            print(f"  {'Category':<22} {'Amount':>10}  {'% of Exp':>8}")
+            separator("-", 42)
+            for cat, total in sorted(cat_totals.items(), key=lambda x: -x[1]):
+                pct = (total / expense_total * 100) if expense_total else 0
+                print(f"  {cat:<22} ${total:>9.2f}  {pct:>7.1f}%")
+            separator("-", 42)
+        print()
+
+
+def view_transactions(transactions):
+    header("Transaction History")
+
+    if not transactions:
+        print("  No transactions recorded yet.\n")
+        return
+
+    print(f"  {'Date':<12} {'Type':<9} {'Category':<18} {'Amount':>9}  Description")
+    separator("-", 65)
+    for t in transactions:
+        sign = "+" if t["type"] == "income" else "-"
+        desc = t["description"][:22] if t["description"] else ""
+        print(f"  {t['date']:<12} {t['type']:<9} {t['category']:<18} "
+              f"{sign}${t['amount']:>8.2f}  {desc}")
+    separator("-", 65)
+    print(f"  Total records: {len(transactions)}\n")
+
+
+def manage_limit(transactions, limit_holder):
+    """limit_holder is a list of one element so we can mutate it."""
+    header("Budget Limit")
+
+    current = limit_holder[0]
+    ym = datetime.now().strftime("%Y-%m")
+    spent = total_expenses_this_month(transactions)
+
+    if current is not None:
+        ratio = spent / current
+        status = f"{ratio*100:.0f}% used" if ratio < 1.0 else "EXCEEDED"
+        print(f"  Current limit : ${current:.2f} / month")
+        print(f"  Spent ({ym}) : ${spent:.2f}  [{status}]")
+    else:
+        print("  No monthly limit set.")
+        print(f"  Spent ({ym}) : ${spent:.2f}")
+
+    print()
+    print("  1. Set / update limit")
+    print("  2. Remove limit")
+    print("  0. Back")
+    choice = input("\n  Choice: ").strip()
+
+    if choice == "1":
+        val = prompt_float("  New monthly total-expense limit: $")
+        limit_holder[0] = val
+        save_limit(val)
+        print(f"  ✓ Limit set to ${val:.2f} per month.\n")
+        check_global_limit(transactions, val)
+
+    elif choice == "2":
+        limit_holder[0] = None
+        save_limit(None)
+        print("  ✓ Limit removed.\n")
+
+    elif choice == "0":
+        pass
+    else:
+        print("  Invalid option.\n")
+
+
+def manage_categories(categories):
+    header("Manage Categories")
+
+    while True:
+        print("  1. View all categories")
+        print("  2. Add new category")
+        print("  3. Delete a category")
+        print("  0. Back")
+        choice = input("\n  Choice: ").strip()
+
+        if choice == "0":
+            break
+
+        elif choice == "1":
+            if not categories:
+                print("  No categories yet.\n")
+            else:
+                for i, cat in enumerate(categories, 1):
+                    print(f"    {i}. {cat}")
+                print()
+
+        elif choice == "2":
+            name = input("  New category name: ").strip()
+            if not name:
+                print("  Name cannot be empty.\n")
+            elif name in categories:
+                print(f"  '{name}' already exists.\n")
+            else:
+                categories.append(name)
+                save_categories(categories)
+                print(f"  ✓ '{name}' added.\n")
+
+        elif choice == "3":
+            if not categories:
+                print("  No categories to delete.\n")
+                continue
+            for i, cat in enumerate(categories, 1):
+                print(f"    {i}. {cat}")
+            raw = input("  Select number to delete: ").strip()
+            try:
+                idx = int(raw) - 1
+                if 0 <= idx < len(categories):
+                    removed = categories.pop(idx)
+                    save_categories(categories)
+                    print(f"  ✓ '{removed}' deleted.\n")
+                else:
+                    print("  Invalid choice.\n")
+            except ValueError:
+                print("  Invalid choice.\n")
+
+        else:
+            print("  Invalid option.\n")
+
+
+# ── Main ──────────────────────────────────────────────────────────────────────
+
+def main():
+    transactions = load_transactions()
+    categories   = load_categories()
+    limit_holder = [load_limit()]   # mutable wrapper
+
+    header("Personal Budget Tracker")
+    print(f"  Loaded {len(transactions)} transaction(s).")
+
+    # Startup limit alert
+    if limit_holder[0] is not None:
+        check_global_limit(transactions, limit_holder[0])
+    print()
+
+    while True:
+        separator("═")
+        print("  MAIN MENU")
+        separator("─")
+        print("  1. Add Transaction")
+        print("  2. Monthly Report")
+        print("  3. View All Transactions")
+        print("  4. Manage Budget Limit")
+        print("  5. Manage Categories")
+        print("  0. Exit")
+        separator("═")
+        choice = input("  Choice: ").strip()
+
+        if choice == "0":
+            save_transactions(transactions)
+            print("\n  Data saved. Goodbye!\n")
+            sys.exit(0)
+        elif choice == "1":
+            print()
+            add_transaction(transactions, categories, limit_holder[0])
+        elif choice == "2":
+            print()
+            monthly_report(transactions)
+        elif choice == "3":
+            print()
+            view_transactions(transactions)
+        elif choice == "4":
+            print()
+            manage_limit(transactions, limit_holder)
+        elif choice == "5":
+            print()
+            manage_categories(categories)
+        else:
+            print("  Invalid option. Try again.\n")
+
+
+if __name__ == "__main__":
+    main()
