@@ -374,6 +374,110 @@ def manage_categories(categories):
             print("  Invalid option.\n")
 
 
+# the CSV import function
+def import_transactions_from_csv(transactions, categories, limit):
+    header("Import Transactions from CSV")
+
+    print("  Expected CSV columns:")
+    print("  date,type,category,amount,description")
+    print()
+    print("  Example row:")
+    print("  2026-05-01,expense,Food,45,HKU canteen lunch")
+    print()
+
+    path = input("  Enter CSV file path: ").strip()
+    path = path.strip('"').strip("'")
+
+    if not path:
+        print("  Import cancelled: no file path entered.\n")
+        return
+
+    if not os.path.exists(path):
+        print(f"  File not found: {path}\n")
+        return
+
+    required_fields = set(FIELDNAMES)
+    imported_count = 0
+    skipped_rows = []
+
+    try:
+        with open(path, newline="", encoding="utf-8-sig") as f:
+            reader = csv.DictReader(f)
+
+            if reader.fieldnames is None:
+                print("  Import failed: CSV file is empty or has no header row.\n")
+                return
+
+            actual_fields = {name.strip() for name in reader.fieldnames if name}
+            missing = required_fields - actual_fields
+
+            if missing:
+                print("  Import failed: missing required column(s):")
+                for field in sorted(missing):
+                    print(f"    - {field}")
+                print()
+                return
+
+            for row_number, row in enumerate(reader, start=2):
+                try:
+                    date_str = row.get("date", "").strip()
+                    t_type = row.get("type", "").strip().lower()
+                    category = row.get("category", "").strip()
+                    amount_raw = row.get("amount", "").strip()
+                    description = row.get("description", "").strip()
+
+                    if not date_str:
+                        raise ValueError("missing date")
+
+                    datetime.strptime(date_str, "%Y-%m-%d")
+
+                    if t_type not in ["income", "expense"]:
+                        raise ValueError("type must be income or expense")
+
+                    if not category:
+                        raise ValueError("missing category")
+
+                    amount = float(amount_raw)
+                    if amount <= 0:
+                        raise ValueError("amount must be positive")
+
+                    transactions.append({
+                        "date": date_str,
+                        "type": t_type,
+                        "category": category,
+                        "amount": amount,
+                        "description": description,
+                    })
+
+                    if category not in categories:
+                        categories.append(category)
+
+                    imported_count += 1
+
+                except Exception as e:
+                    skipped_rows.append((row_number, str(e)))
+
+    except Exception as e:
+        print(f"  Import failed: {e}\n")
+        return
+
+    save_transactions(transactions)
+    save_categories(categories)
+
+    print(f"\n  ✓ Imported {imported_count} transaction(s).")
+
+    if skipped_rows:
+        print(f"  ⚠ Skipped {len(skipped_rows)} invalid row(s):")
+        for row_number, reason in skipped_rows[:10]:
+            print(f"    Row {row_number}: {reason}")
+
+        if len(skipped_rows) > 10:
+            print(f"    ... and {len(skipped_rows) - 10} more")
+
+    if imported_count > 0:
+        check_global_limit(transactions, limit)
+
+    print()
 # ── Main ──────────────────────────────────────────────────────────────────────
 # The primary loop
 def main():
@@ -398,6 +502,7 @@ def main():
         print("  3. View All Transactions")
         print("  4. Manage Budget Limit")
         print("  5. Manage Categories")
+        print("  6. Import Transactions from CSV")
         print("  0. Exit")
         separator("═")
         choice = input("  Choice: ").strip()
@@ -421,6 +526,9 @@ def main():
         elif choice == "5":
             print()
             manage_categories(categories)
+        elif choice == "6":
+            print()
+            import_transactions_from_csv(transactions, categories, limit_holder[0])
         else:
             print("  Invalid option. Try again.\n")
 
