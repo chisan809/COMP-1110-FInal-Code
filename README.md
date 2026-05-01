@@ -24,6 +24,15 @@ Compilation:
 #### - budget.py
 - The main program app
 - Explanations for each function are in the code
+- Main features:
+  - Adding and deleting transactions manually
+  - Creating and managing custom categories
+  - Importing and csv transaction files
+  - Generating a monthly report and graphical charts
+  - Setting monthly spending limit and giving out warnings when approaching the limit
+  - Setting recurring transactions from a csv file
+  - Setting rollover budgeting
+
 #### - budget_data.csv
 - Empty initially
 - Stores the transactions data
@@ -33,3 +42,12 @@ Compilation:
 #### - budget_limit.txt
 - Empty initially
 - Stores the budget limit
+#### - category_budgets.csv
+- Empty initially
+- Stores the budgets for each category
+#### - recurring_transactions.csv
+- Empty initially
+- Stores the recurring transactions
+#### - rollover_budget.txt
+- Empty initially
+- Stores the rollover budgets
