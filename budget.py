@@ -155,7 +155,29 @@ def check_global_limit(transactions, limit):
               f"{ratio*100:.0f}% of your ${limit:.2f} limit "
               f"(${spent:.2f} spent in {ym})")
 
+# Add the text-based expense chart function
+def print_expense_chart(cat_totals, max_bar_length=30):
+    if not cat_totals:
+        return
 
+    max_amount = max(cat_totals.values())
+    if max_amount <= 0:
+        return
+
+    print()
+    print("  Expense Chart by Category")
+    separator("-", 65)
+
+    for cat, total in sorted(cat_totals.items(), key=lambda x: -x[1]):
+        bar_length = int((total / max_amount) * max_bar_length)
+
+        if total > 0 and bar_length == 0:
+            bar_length = 1
+
+        bar = "█" * bar_length
+        print(f"  {cat:<22} | {bar:<30} ${total:>9.2f}")
+
+    separator("-", 65)
 # ── Features ──────────────────────────────────────────────────────────────────
 # Add a new transaction
 def add_transaction(transactions, categories, limit):
@@ -373,7 +395,6 @@ def manage_categories(categories):
         else:
             print("  Invalid option.\n")
 
-
 # the CSV import function
 def import_transactions_from_csv(transactions, categories, limit):
     header("Import Transactions from CSV")
@@ -478,7 +499,9 @@ def import_transactions_from_csv(transactions, categories, limit):
         check_global_limit(transactions, limit)
 
     print()
+
 # ── Main ──────────────────────────────────────────────────────────────────────
+
 # The primary loop
 def main():
     transactions = load_transactions()
