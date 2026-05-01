@@ -648,6 +648,7 @@ def main():
         print("  4. Manage Budget Limit")
         print("  5. Manage Categories")
         print("  6. Import Transactions from CSV")
+        print("  7. Manage Category Budgets")
         print("  0. Exit")
         separator("═")
         choice = input("  Choice: ").strip()
@@ -661,7 +662,7 @@ def main():
             add_transaction(transactions, categories, limit_holder[0])
         elif choice == "2":
             print()
-            monthly_report(transactions)
+            monthly_report(transactions, category_budgets)
         elif choice == "3":
             print()
             view_transactions(transactions)
@@ -674,6 +675,9 @@ def main():
         elif choice == "6":
             print()
             import_transactions_from_csv(transactions, categories, limit_holder[0])
+        elif choice == "7":
+            print()
+            manage_category_budgets(categories, category_budgets)
         else:
             print("  Invalid option. Try again.\n")
 
