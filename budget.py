@@ -8,24 +8,60 @@ DATA_FILE       = "budget_data.csv"
 CATEGORIES_FILE = "budget_categories.csv"
 LIMIT_FILE      = "budget_limit.txt"
 CATEGORY_BUDGETS_FILE = "category_budgets.csv"
+RECURRING_FILE = "recurring_transactions.csv"
 WARNING_THRESHOLD = 0.85  # warn at 85% of limit
 
 FIELDNAMES = ["date", "type", "category", "amount", "description"]
 
 
 # ── Data I/O ──────────────────────────────────────────────────────────────────
-# Read "budget_data.csv" and return a list of transactions
+# Read "budget_data.csv" safely and skip invalid rows
 def load_transactions():
     transactions = []
+
     if not os.path.exists(DATA_FILE):
         return transactions
-    with open(DATA_FILE, newline="", encoding="utf-8") as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            row["amount"] = float(row["amount"])
-            transactions.append(row)
-    return transactions
 
+    with open(DATA_FILE, newline="", encoding="utf-8-sig") as f:
+        reader = csv.DictReader(f)
+
+        if reader.fieldnames is None:
+            return transactions
+
+        for row_number, row in enumerate(reader, start=2):
+            try:
+                date_str = row.get("date", "").strip()
+                t_type = row.get("type", "").strip().lower()
+                category = row.get("category", "").strip()
+                amount_raw = row.get("amount", "").strip()
+                description = row.get("description", "").strip()
+
+                datetime.strptime(date_str, "%Y-%m-%d")
+
+                if t_type not in ["income", "expense"]:
+                    raise ValueError("type must be income or expense")
+
+                if not category:
+                    raise ValueError("missing category")
+
+                amount = float(amount_raw)
+
+                if amount <= 0:
+                    raise ValueError("amount must be positive")
+
+                transactions.append({
+                    "date": date_str,
+                    "type": t_type,
+                    "category": category,
+                    "amount": amount,
+                    "description": description,
+                })
+
+            except Exception as e:
+                print(f"  Skipping invalid saved row {row_number}: {e}")
+
+    return transactions
+    
 # Write the list of transactions to "budget_data.csv"
 def save_transactions(transactions):
     with open(DATA_FILE, "w", newline="", encoding="utf-8") as f:
@@ -213,6 +249,7 @@ def print_expense_chart(cat_totals, max_bar_length=30):
         print(f"  {cat:<22} | {bar:<30} ${total:>9.2f}")
 
     separator("-", 65)
+
 # ── Features ──────────────────────────────────────────────────────────────────
 # Add a new transaction
 def add_transaction(transactions, categories, limit):
@@ -623,6 +660,174 @@ def import_transactions_from_csv(transactions, categories, limit):
 
     print()
 
+# Add edit/delete transaction function
+def manage_transactions(transactions):
+    header("Manage Transactions")
+
+    if not transactions:
+        print("  No transactions recorded yet.\n")
+        return
+
+    while True:
+        print("  Transactions:")
+        separator("-", 80)
+
+        for i, t in enumerate(transactions, 1):
+            sign = "+" if t["type"] == "income" else "-"
+            print(f"  {i}. {t['date']} | {t['type']} | {t['category']} | "
+                  f"{sign}${t['amount']:.2f} | {t['description']}")
+
+        separator("-", 80)
+        print("  1. Edit transaction")
+        print("  2. Delete transaction")
+        print("  0. Back")
+
+        choice = input("\n  Choice: ").strip()
+
+        if choice == "0":
+            break
+
+        elif choice == "1":
+            raw = input("  Select transaction number to edit: ").strip()
+
+            try:
+                idx = int(raw) - 1
+
+                if not (0 <= idx < len(transactions)):
+                    print("  Invalid transaction number.\n")
+                    continue
+
+                t = transactions[idx]
+
+                print("  Press Enter to keep the current value.")
+
+                new_date = input(f"  Date [{t['date']}]: ").strip()
+                if new_date:
+                    datetime.strptime(new_date, "%Y-%m-%d")
+                    t["date"] = new_date
+
+                new_type = input(f"  Type [{t['type']}]: ").strip().lower()
+                if new_type:
+                    if new_type not in ["income", "expense"]:
+                        print("  Invalid type. Must be income or expense.\n")
+                        continue
+                    t["type"] = new_type
+
+                new_category = input(f"  Category [{t['category']}]: ").strip()
+                if new_category:
+                    t["category"] = new_category
+
+                new_amount = input(f"  Amount [{t['amount']}]: ").strip()
+                if new_amount:
+                    amount = float(new_amount)
+                    if amount <= 0:
+                        print("  Amount must be positive.\n")
+                        continue
+                    t["amount"] = amount
+
+                new_description = input(f"  Description [{t['description']}]: ").strip()
+                if new_description:
+                    t["description"] = new_description
+
+                save_transactions(transactions)
+                print("  ✓ Transaction updated.\n")
+
+            except ValueError:
+                print("  Invalid input.\n")
+
+        elif choice == "2":
+            raw = input("  Select transaction number to delete: ").strip()
+
+            try:
+                idx = int(raw) - 1
+
+                if 0 <= idx < len(transactions):
+                    removed = transactions.pop(idx)
+                    save_transactions(transactions)
+                    print(f"  ✓ Deleted transaction: {removed['description']}\n")
+                else:
+                    print("  Invalid transaction number.\n")
+
+            except ValueError:
+                print("  Invalid input.\n")
+
+        else:
+            print("  Invalid option.\n")
+
+# Add recurring transactions for a selected month
+def apply_recurring_transactions(transactions, categories, limit):
+    header("Apply Recurring Transactions")
+
+    if not os.path.exists(RECURRING_FILE):
+        print("  No recurring_transactions.csv file found.\n")
+        return
+
+    month = input("  Enter month to apply recurring transactions (YYYY-MM): ").strip()
+
+    try:
+        datetime.strptime(month, "%Y-%m")
+    except ValueError:
+        print("  Invalid month format. Use YYYY-MM.\n")
+        return
+
+    added_count = 0
+
+    with open(RECURRING_FILE, newline="", encoding="utf-8-sig") as f:
+        reader = csv.DictReader(f)
+
+        for row in reader:
+            try:
+                day = int(row["day"])
+                t_type = row["type"].strip().lower()
+                category = row["category"].strip()
+                amount = float(row["amount"])
+                description = row["description"].strip()
+
+                date_str = f"{month}-{day:02d}"
+                datetime.strptime(date_str, "%Y-%m-%d")
+
+                if t_type not in ["income", "expense"]:
+                    raise ValueError
+
+                if amount <= 0:
+                    raise ValueError
+
+                already_exists = any(
+                    t["date"] == date_str and
+                    t["type"] == t_type and
+                    t["category"] == category and
+                    t["amount"] == amount and
+                    t["description"] == description
+                    for t in transactions
+                )
+
+                if already_exists:
+                    continue
+
+                transactions.append({
+                    "date": date_str,
+                    "type": t_type,
+                    "category": category,
+                    "amount": amount,
+                    "description": description,
+                })
+
+                if category not in categories:
+                    categories.append(category)
+
+                added_count += 1
+
+            except Exception:
+                pass
+
+    save_transactions(transactions)
+    save_categories(categories)
+
+    print(f"  ✓ Added {added_count} recurring transaction(s).\n")
+
+    if added_count > 0:
+        check_global_limit(transactions, limit)
+
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 # The primary loop
@@ -651,6 +856,8 @@ def main():
         print("  5. Manage Categories")
         print("  6. Import Transactions from CSV")
         print("  7. Manage Category Budgets")
+        print("  8. Edit/Delete Transactions")
+        print("  9. Apply Recurring Transactions")
         print("  0. Exit")
         separator("═")
         choice = input("  Choice: ").strip()
@@ -680,6 +887,12 @@ def main():
         elif choice == "7":
             print()
             manage_category_budgets(categories, category_budgets)
+        elif choice == "8":
+            print()
+            manage_transactions(transactions)
+        elif choice == "9":
+            print()
+            apply_recurring_transactions(transactions, categories, limit_holder[0])
         else:
             print("  Invalid option. Try again.\n")
 
