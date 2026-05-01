@@ -950,6 +950,7 @@ def main():
     categories   = load_categories()
     limit_holder = [load_limit()]   # mutable wrapper
     category_budgets = load_category_budgets()
+    rollovers = load_rollovers()
 
     header("Personal Budget Tracker")
     print(f"  Loaded {len(transactions)} transaction(s).")
@@ -972,6 +973,7 @@ def main():
         print("  7. Manage Category Budgets")
         print("  8. Edit/Delete Transactions")
         print("  9. Apply Recurring Transactions")
+        print("  10. Close Month and Rollover")
         print("  0. Exit")
         separator("═")
         choice = input("  Choice: ").strip()
@@ -1007,6 +1009,9 @@ def main():
         elif choice == "9":
             print()
             apply_recurring_transactions(transactions, categories, limit_holder[0])
+        elif choice == "10":
+            print()
+            close_month_and_rollover(transactions, category_budgets, rollovers)
         else:
             print("  Invalid option. Try again.\n")
 
