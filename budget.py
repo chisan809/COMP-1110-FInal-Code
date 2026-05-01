@@ -338,6 +338,8 @@ def monthly_report(transactions, category_budgets):
                 print()
                 for cat, amount in overspent_categories:
                     print(f"  ⚠ {cat} exceeded its category budget by ${amount:.2f}")
+            
+            print_expense_chart(cat_totals)
 
         print()
 
