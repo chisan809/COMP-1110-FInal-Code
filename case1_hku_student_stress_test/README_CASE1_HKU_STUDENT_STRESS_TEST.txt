@@ -13,12 +13,6 @@ Stress-test large CSV import, many categories, multi-month reports, large one-of
 - `rollover_balances.csv`: rollover balance file
 - `scenario1_studentSpending_stressTest_transactions.csv`: main scenario CSV to import
 
-## How to start
-1. Open Terminal.
-2. `cd` into this folder.
-3. Run:
-   `python3 budget.py`
-
 ## Demo flow
 1. Choose option `6`: Import Transactions from CSV.
 2. Type:
@@ -41,8 +35,3 @@ Global monthly limit: $11500.00
 - Category budgets work like envelope budgeting.
 - Text chart makes the terminal report easier to understand.
 - Recurring transactions and rollover budgeting can be tested where relevant.
-
-## Reminder
-If you import the same CSV twice, duplicate transactions may appear. Reset `budget_data.csv` to only:
-`date,type,category,amount,description`
-before testing again.
