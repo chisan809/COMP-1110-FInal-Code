@@ -6,7 +6,7 @@ Test shared payments, delayed reimbursements, and income-vs-expense separation.
 ## flow
 1. Choose option `6`: Import Transactions from CSV.
 2. Type:
-   `scenario2_group_payment_reimbursement_extended.csv`
+   `scenario2_groupPayment.csv`
 3. Choose option `2`: Monthly Report.
 4. Select the month you want to view.
 5. Explain total income, total expenses, net balance, global limit warning, category budget warnings, and text chart.
