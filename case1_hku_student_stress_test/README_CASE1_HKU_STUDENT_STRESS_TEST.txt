@@ -3,16 +3,6 @@
 ## Goal
 Stress-test large CSV import, many categories, multi-month reports, large one-off expenses, global limit warnings, category budget warnings, and text chart.
 
-## Files in this folder
-- `budget.py`: the program to run
-- `budget_data.csv`: empty transaction file for clean testing
-- `budget_categories.csv`: category storage file
-- `budget_limit.txt`: global monthly limit for this case
-- `category_budgets.csv`: category budget settings
-- `recurring_transactions.csv`: recurring transaction file
-- `rollover_balances.csv`: rollover balance file
-- `scenario1_studentSpending_stressTest_transactions.csv`: main scenario CSV to import
-
 ## Demo flow
 1. Choose option `6`: Import Transactions from CSV.
 2. Type:
