@@ -3,22 +3,6 @@
 ## Goal
 Test shared payments, delayed reimbursements, and income-vs-expense separation.
 
-## Files in this folder
-- `budget.py`: the program to run
-- `budget_data.csv`: empty transaction file for clean testing
-- `budget_categories.csv`: category storage file
-- `budget_limit.txt`: global monthly limit for this case
-- `category_budgets.csv`: category budget settings
-- `recurring_transactions.csv`: recurring transaction file
-- `rollover_balances.csv`: rollover balance file
-- `scenario2_group_payment_reimbursement_extended.csv`: main scenario CSV to import
-
-## How to start
-1. Open Terminal.
-2. `cd` into this folder.
-3. Run:
-   `python3 budget.py`
-
 ## Demo flow
 1. Choose option `6`: Import Transactions from CSV.
 2. Type:
@@ -41,8 +25,3 @@ Global monthly limit: $6000.00
 - Category budgets work like envelope budgeting.
 - Text chart makes the terminal report easier to understand.
 - Recurring transactions and rollover budgeting can be tested where relevant.
-
-## Reminder
-If you import the same CSV twice, duplicate transactions may appear. Reset `budget_data.csv` to only:
-`date,type,category,amount,description`
-before testing again.
