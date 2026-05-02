@@ -2,7 +2,6 @@
 
 ## Topic A
 
-
 ### Team Members
 | Name | UID |
 | --- | --- |
