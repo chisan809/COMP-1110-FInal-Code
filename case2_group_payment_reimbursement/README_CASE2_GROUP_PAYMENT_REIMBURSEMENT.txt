@@ -3,7 +3,7 @@
 ## Goal
 Test shared payments, delayed reimbursements, and income-vs-expense separation.
 
-## Demo flow
+## flow
 1. Choose option `6`: Import Transactions from CSV.
 2. Type:
    `scenario2_group_payment_reimbursement_extended.csv`
@@ -17,11 +17,3 @@ Global monthly limit: $6000.00
 - 2026-05: income $9850.00, expenses $10047.00, net $-197.00, limit exceeded by $4047.00
 - 2026-06: income $10350.00, expenses $19287.00, net $-8937.00, limit exceeded by $13287.00
 - 2026-07: income $8600.00, expenses $9129.00, net $-529.00, limit exceeded by $3129.00
-
-## How the program is functional in this demo
-- CSV import lets the user add many transactions at once.
-- Monthly report calculates income, expenses, net balance, category spending, and warnings.
-- Global budget limit checks whether total monthly expenses exceed the limit.
-- Category budgets work like envelope budgeting.
-- Text chart makes the terminal report easier to understand.
-- Recurring transactions and rollover budgeting can be tested where relevant.
