@@ -1,0 +1,128 @@
+date,type,category,amount,description
+2026-05-01,income,Allowance,6000.0,Monthly allowance
+2026-05-02,expense,Food,55.0,Simple lunch
+2026-05-03,expense,Entertainment,1500.0,Group dinner paid by me
+2026-05-04,expense,Group Project,850.0,Materials for programming group project
+2026-05-05,expense,Printing,360.0,Printing posters and notes
+2026-05-06,expense,Transport,220.0,Taxi after late group meeting
+2026-05-07,income,Reimbursement,500.0,Friend A paid me back
+2026-05-08,income,Reimbursement,500.0,Friend B paid me back
+2026-05-09,income,Reimbursement,500.0,Friend C paid me back
+2026-05-10,income,Reimbursement,200.0,Printing reimbursement
+2026-05-11,expense,Groceries,580.0,Weekly supermarket shopping
+2026-05-12,expense,Food,65.0,Campus dinner
+2026-05-13,expense,Entertainment,950.0,Second group dinner
+2026-05-14,expense,Food,120.0,Food delivery
+2026-05-15,expense,Transport,75.0,MTR and bus for meeting
+2026-05-16,expense,Group Project,480.0,Extra project components
+2026-05-17,expense,Transport,120.0,Taxi to presentation venue
+2026-05-18,expense,Food,88.0,Dinner after tutorial
+2026-05-19,expense,Coffee,39.0,Coffee for group discussion
+2026-05-19,expense,Food,72.0,Quick dinner before coding
+2026-05-20,expense,Group Project,320.0,Arduino board and cables
+2026-05-20,expense,Printing,180.0,Extra colour printing
+2026-05-21,income,Reimbursement,250.0,Friend D partial project reimbursement
+2026-05-21,expense,Transport,18.0,MTR to campus
+2026-05-22,expense,Entertainment,420.0,Snacks and drinks for group movie night
+2026-05-22,expense,Food,45.0,HKU canteen lunch
+2026-05-23,expense,Coffee,52.0,Cafe study session
+2026-05-23,expense,Groceries,260.0,Snacks for group coding night
+2026-05-24,expense,Group Project,690.0,Prototype replacement parts
+2026-05-24,expense,Transport,160.0,Taxi carrying project materials
+2026-05-25,income,Reimbursement,400.0,Friend E project repayment
+2026-05-25,expense,Food,110.0,Dinner near campus
+2026-05-26,expense,Academic,280.0,Reference book for project
+2026-05-26,expense,Software,158.0,ChatGPT Plus for project work
+2026-05-27,expense,Food,95.0,Food delivery during debugging
+2026-05-27,expense,Transport,22.0,Bus and MTR
+2026-05-28,expense,Entertainment,780.0,Celebration dinner paid by me
+2026-05-29,income,Reimbursement,300.0,Friend F celebration repayment
+2026-05-29,expense,Shopping,480.0,Formal shirt for presentation
+2026-05-30,expense,Food,68.0,Lunch before final demo
+2026-05-30,expense,Printing,240.0,Final report printing
+2026-05-31,income,Part-time Job,1200.0,Weekend tutoring income
+2026-05-31,expense,Transport,95.0,Taxi after late submission
+2026-06-01,income,Allowance,6000.0,Monthly allowance
+2026-06-01,expense,Rent,4200.0,Student residence rent
+2026-06-02,expense,Food,58.0,Canteen lunch
+2026-06-02,expense,Transport,18.0,MTR to campus
+2026-06-03,expense,Coffee,45.0,Coffee during project meeting
+2026-06-03,expense,Group Project,980.0,New sensor kit
+2026-06-04,expense,Food,135.0,Group dinner before presentation
+2026-06-04,expense,Printing,420.0,Poster reprint after design change
+2026-06-05,income,Reimbursement,600.0,Friend A paid project share
+2026-06-05,expense,Entertainment,1680.0,Large group hotpot paid by me
+2026-06-06,income,Reimbursement,500.0,Friend B paid dinner share
+2026-06-06,income,Reimbursement,500.0,Friend C paid dinner share
+2026-06-07,expense,Groceries,620.0,Weekly groceries
+2026-06-07,expense,Transport,230.0,Taxi after rainstorm
+2026-06-08,expense,Academic,380.0,Online project course
+2026-06-08,expense,Software,250.0,Cloud storage for project files
+2026-06-09,expense,Coffee,39.0,Iced americano
+2026-06-09,expense,Food,88.0,Dinner near library
+2026-06-10,income,Reimbursement,350.0,Friend D paid materials share
+2026-06-10,expense,Group Project,760.0,Battery pack and tools
+2026-06-11,expense,Shopping,680.0,Clothes for presentation
+2026-06-11,expense,Transport,80.0,MTR and bus for interview
+2026-06-12,expense,Entertainment,320.0,Movie after deadline
+2026-06-12,expense,Food,112.0,Food delivery
+2026-06-13,expense,Coffee,52.0,Cafe work session
+2026-06-13,expense,Groceries,450.0,Supermarket restock
+2026-06-14,expense,Group Project,410.0,Extra wires and tools
+2026-06-14,expense,Printing,160.0,Report binding
+2026-06-15,income,Part-time Job,1500.0,Tutoring income
+2026-06-15,expense,Transport,26.0,MTR to tutoring
+2026-06-16,expense,Coffee,42.0,Coffee before tutorial
+2026-06-16,expense,Food,75.0,Campus dinner
+2026-06-17,expense,Entertainment,850.0,Farewell dinner paid by me
+2026-06-18,income,Reimbursement,300.0,Friend E farewell repayment
+2026-06-18,expense,Food,46.0,Simple lunch
+2026-06-19,expense,Transport,120.0,Taxi with luggage
+2026-06-19,expense,Travel,1800.0,Short trip deposit
+2026-06-20,expense,Food,130.0,Dinner during trip planning
+2026-06-20,expense,Insurance,380.0,Travel insurance
+2026-06-21,expense,Coffee,38.0,Coffee while shopping
+2026-06-21,expense,Shopping,980.0,Luggage and travel items
+2026-06-22,income,Reimbursement,200.0,Small reimbursement from classmate
+2026-06-22,expense,Groceries,390.0,Snacks and household items
+2026-06-23,expense,Food,92.0,Dinner with classmates
+2026-06-23,expense,Transport,18.0,Bus and MTR
+2026-06-24,expense,Entertainment,460.0,Karaoke with friends
+2026-06-24,expense,Food,65.0,Late night noodles
+2026-06-25,expense,Academic,210.0,Notebook and stationery
+2026-06-25,expense,Coffee,48.0,Cafe study session
+2026-06-26,income,Reimbursement,150.0,Late project reimbursement
+2026-06-26,expense,Group Project,300.0,Replacement components
+2026-06-27,expense,Food,78.0,Weekend brunch
+2026-06-27,expense,Transport,180.0,Taxi after dinner
+2026-06-28,expense,Entertainment,620.0,Board game cafe paid by me
+2026-06-29,income,Reimbursement,250.0,Friend paid entertainment share
+2026-06-29,expense,Food,98.0,Campus dinner
+2026-06-30,expense,Food,56.0,Canteen lunch
+2026-06-30,expense,Transport,18.0,MTR to campus
+2026-07-01,income,Allowance,6000.0,Monthly allowance
+2026-07-01,expense,Rent,4200.0,Student residence rent
+2026-07-02,income,Reimbursement,400.0,Late repayment from June dinner
+2026-07-02,expense,Food,65.0,Lunch near campus
+2026-07-03,expense,Coffee,42.0,Coffee with project teammate
+2026-07-03,expense,Transport,18.0,MTR
+2026-07-04,expense,Entertainment,980.0,Birthday dinner paid by me
+2026-07-05,income,Reimbursement,600.0,Friends paid birthday dinner share
+2026-07-05,expense,Groceries,520.0,Weekly groceries
+2026-07-06,expense,Food,120.0,Food delivery
+2026-07-07,expense,Academic,450.0,Summer course materials
+2026-07-08,expense,Transport,150.0,Taxi after heavy rain
+2026-07-09,expense,Food,88.0,Dinner with classmate
+2026-07-10,expense,Group Project,260.0,Small components for final repair
+2026-07-11,income,Part-time Job,1300.0,Tutoring income
+2026-07-11,expense,Shopping,720.0,Clothes
+2026-07-12,expense,Coffee,52.0,Cafe study session
+2026-07-12,expense,Food,95.0,Weekend brunch
+2026-07-13,expense,Entertainment,450.0,Cinema and snacks
+2026-07-14,expense,Transport,26.0,MTR and bus
+2026-07-15,expense,Food,75.0,Campus dinner
+2026-07-16,expense,Printing,90.0,Print notes
+2026-07-17,expense,Software,158.0,ChatGPT Plus
+2026-07-18,expense,Groceries,460.0,Supermarket
+2026-07-19,expense,Food,110.0,Dinner near dorm
+2026-07-20,income,Reimbursement,300.0,Friend paid back final share
