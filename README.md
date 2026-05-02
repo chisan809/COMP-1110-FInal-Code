@@ -6,7 +6,7 @@
 | Name | UID |
 | --- | --- |
 | Hon Chi San | 3036519875 |
-| Cheung Chun Yu | xxxxxxxxxx |
+| Cheung Chun Yu | 3036538388 |
 | Seto Ho Yeung | 3036665777 |
 | Kwok Hoi | 3036668183 |
 
