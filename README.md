@@ -52,8 +52,3 @@ Compilation:
 #### - rollover_budget.csv
 - Empty initially
 - Stores the rollover budgets
-#### - scenario1_studentSpending.csv
-#### - scenario2_groupPayment.csv
-#### - scenario3_subscription.csv
-#### - scenario4_travel.csv
-- Contains transaction records for different scenarios
