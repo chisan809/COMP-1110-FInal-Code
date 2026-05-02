@@ -1,0 +1,9 @@
+day,type,category,amount,description
+1,income,Allowance,8500,Monthly allowance
+1,expense,Rent,4200,Monthly rent
+5,expense,Subscription,68,Spotify
+6,expense,Subscription,93,Netflix
+8,expense,Subscription,23,iCloud
+10,expense,Software,158,ChatGPT Plus
+12,expense,Phone,198,Mobile phone plan
+15,income,Part-time Job,1200,Weekend tutoring income

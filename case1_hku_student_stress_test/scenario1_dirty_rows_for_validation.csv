@@ -1,0 +1,10 @@
+date,type,category,amount,description
+2026-05-01,income,Allowance,9000,Valid row should import
+2026-05-02,Expense,Food,45,Capital type should be accepted after lowercasing if code strips lower
+2026/05/03,expense,Food,50,Wrong date format should skip
+2026-05-04,expense,,90,Missing category should skip
+2026-05-05,expense,Food,abc,Text amount should skip
+2026-05-06,expense,Food,-30,Negative amount should skip
+2026-05-07,refund,Food,30,Invalid type should skip
+2026-13-08,expense,Transport,20,Invalid month should skip
+2026-05-09,expense,Coffee,39,Valid coffee row should import

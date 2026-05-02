@@ -1,0 +1,375 @@
+date,type,category,amount,description
+2026-05-01,income,Allowance,9000.0,Monthly family allowance
+2026-05-01,expense,Food,32.0,HKU canteen lunch
+2026-05-01,expense,Food,78.0,Late night noodles
+2026-05-01,expense,Rent,4200.0,Student residence rent
+2026-05-01,expense,Transport,23.0,MTR to campus
+2026-05-02,expense,Coffee,48.0,Study coffee
+2026-05-02,expense,Food,112.0,Weekend brunch
+2026-05-02,expense,Shopping,180.0,Clothes
+2026-05-03,expense,Academic,620.0,Textbook purchase
+2026-05-03,expense,Coffee,28.0,Coffee with friend
+2026-05-03,expense,Food,112.0,HKU canteen lunch
+2026-05-03,expense,Food,88.0,Late night noodles
+2026-05-03,expense,Food,65.0,Sandwich before lecture
+2026-05-04,expense,Food,138.0,Convenience store meal
+2026-05-04,expense,Food,78.0,Convenience store meal
+2026-05-04,expense,Groceries,260.0,Fruit and breakfast food
+2026-05-04,expense,Transport,8.5,Bus and MTR
+2026-05-05,expense,Coffee,32.0,Iced americano
+2026-05-05,expense,Food,96.0,Convenience store meal
+2026-05-05,expense,Subscription,68.0,Spotify
+2026-05-05,expense,Transport,23.0,Tram ride
+2026-05-06,expense,Food,28.0,Weekend brunch
+2026-05-06,expense,Printing,18.0,Textbook purchase
+2026-05-06,expense,Subscription,93.0,Netflix
+2026-05-06,expense,Transport,18.0,MTR to Mong Kok
+2026-05-07,expense,Coffee,39.0,Iced americano
+2026-05-07,expense,Food,65.0,Food delivery
+2026-05-07,expense,Groceries,220.0,Household supplies
+2026-05-07,expense,Shopping,680.0,Skincare
+2026-05-07,expense,Transport,18.0,MTR to Central
+2026-05-08,expense,Coffee,39.0,Study coffee
+2026-05-08,expense,Food,88.0,Weekend brunch
+2026-05-08,expense,Subscription,23.0,iCloud storage
+2026-05-08,expense,Transport,18.0,Bus and MTR
+2026-05-09,expense,Coffee,45.0,Iced americano
+2026-05-09,expense,Food,112.0,Bubble tea and snack
+2026-05-09,expense,Food,96.0,Convenience store meal
+2026-05-09,expense,Food,45.0,Sandwich before lecture
+2026-05-10,expense,Food,96.0,Late night noodles
+2026-05-10,expense,Software,158.0,ChatGPT Plus
+2026-05-11,expense,Electronics,2899.0,iPad keyboard for study
+2026-05-11,expense,Entertainment,180.0,Board game cafe
+2026-05-11,expense,Food,78.0,Bubble tea and snack
+2026-05-11,expense,Food,28.0,Late night noodles
+2026-05-11,expense,Groceries,180.0,Household supplies
+2026-05-11,expense,Transport,23.0,MTR to Mong Kok
+2026-05-12,expense,Coffee,48.0,Iced americano
+2026-05-12,expense,Food,38.0,Dinner with classmate
+2026-05-12,expense,Food,52.0,Food delivery
+2026-05-12,expense,Printing,45.0,Textbook purchase
+2026-05-12,expense,Software,120.0,Canva Pro
+2026-05-12,expense,Transport,8.5,MTR to campus
+2026-05-13,expense,Coffee,28.0,Iced americano
+2026-05-13,expense,Food,88.0,Food delivery
+2026-05-13,expense,Shopping,180.0,Stationery
+2026-05-13,expense,Taxi,180.0,Taxi to presentation venue
+2026-05-13,expense,Transport,8.5,Tram ride
+2026-05-14,expense,Food,52.0,Campus dinner
+2026-05-14,expense,Food,138.0,Dinner with classmate
+2026-05-14,expense,Shopping,88.0,Online shopping
+2026-05-14,expense,Transport,23.0,MTR to campus
+2026-05-15,income,Part-time Job,1500.0,Tutoring income
+2026-05-15,expense,Food,78.0,Late night noodles
+2026-05-15,expense,Shopping,520.0,Phone cable
+2026-05-15,expense,Transport,8.5,MTR to Mong Kok
+2026-05-16,expense,Food,96.0,Bubble tea and snack
+2026-05-16,expense,Shopping,520.0,Shoes
+2026-05-17,expense,Food,112.0,Campus dinner
+2026-05-17,expense,Food,96.0,HKU canteen lunch
+2026-05-17,expense,Food,112.0,Weekend brunch
+2026-05-18,expense,Coffee,28.0,Latte before lecture
+2026-05-18,expense,Entertainment,950.0,Concert and dinner
+2026-05-18,expense,Food,112.0,Convenience store meal
+2026-05-18,expense,Groceries,380.0,Household supplies
+2026-05-18,expense,Transport,26.0,Tram ride
+2026-05-19,expense,Coffee,36.0,Iced americano
+2026-05-19,expense,Food,88.0,Food delivery
+2026-05-19,expense,Food,38.0,HKU canteen lunch
+2026-05-19,expense,Shopping,88.0,Stationery
+2026-05-19,expense,Transport,21.0,Tram ride
+2026-05-20,expense,Coffee,36.0,Latte before lecture
+2026-05-20,expense,Food,112.0,Campus dinner
+2026-05-20,expense,Food,88.0,Campus dinner
+2026-05-20,expense,Transport,8.5,Bus to tutorial
+2026-05-21,expense,Coffee,48.0,Study coffee
+2026-05-21,expense,Food,32.0,Sandwich before lecture
+2026-05-21,expense,Transport,16.5,Tram ride
+2026-05-22,income,Reimbursement,300.0,Friend paid me back
+2026-05-22,expense,Coffee,42.0,Iced americano
+2026-05-22,expense,Food,78.0,Campus dinner
+2026-05-22,expense,Food,65.0,Weekend brunch
+2026-05-22,expense,Transport,21.0,Bus to tutorial
+2026-05-23,expense,Food,38.0,HKU canteen lunch
+2026-05-23,expense,Food,138.0,McDonalds quick meal
+2026-05-23,expense,Food,52.0,McDonalds quick meal
+2026-05-23,expense,Transport,14.5,Bus to tutorial
+2026-05-24,expense,Coffee,48.0,Latte before lecture
+2026-05-24,expense,Entertainment,320.0,Concert ticket
+2026-05-24,expense,Food,112.0,Convenience store meal
+2026-05-24,expense,Food,65.0,Dinner with classmate
+2026-05-24,expense,Group Project,850.0,Project materials
+2026-05-25,expense,Coffee,48.0,Iced americano
+2026-05-25,expense,Food,45.0,Bubble tea and snack
+2026-05-25,expense,Food,96.0,Late night noodles
+2026-05-25,expense,Printing,260.0,Poster and notes printing
+2026-05-25,expense,Transport,21.0,MTR to Central
+2026-05-26,expense,Coffee,45.0,Coffee with friend
+2026-05-26,expense,Food,96.0,Sandwich before lecture
+2026-05-26,expense,Groceries,380.0,Household supplies
+2026-05-26,expense,Shopping,520.0,Skincare
+2026-05-26,expense,Transport,12.0,MTR to campus
+2026-05-27,expense,Entertainment,480.0,Birthday dinner
+2026-05-27,expense,Food,38.0,Weekend brunch
+2026-05-27,expense,Taxi,88.0,Taxi after group meeting
+2026-05-27,expense,Transport,14.5,MTR to campus
+2026-05-28,expense,Food,28.0,Sandwich before lecture
+2026-05-28,expense,Transport,18.0,MTR to Mong Kok
+2026-05-29,expense,Coffee,36.0,Iced americano
+2026-05-29,expense,Food,32.0,Bubble tea and snack
+2026-05-29,expense,Transport,14.5,MTR to campus
+2026-05-30,expense,Academic,45.0,Notebook set
+2026-05-30,expense,Food,45.0,Campus dinner
+2026-05-30,expense,Food,96.0,Campus dinner
+2026-05-30,expense,Transport,26.0,Bus and MTR
+2026-05-31,expense,Academic,18.0,Notebook set
+2026-05-31,expense,Coffee,28.0,Cafe study session
+2026-05-31,expense,Food,88.0,Convenience store meal
+2026-05-31,expense,Transport,21.0,MTR to Central
+2026-05-31,expense,Transport,0.5,Octopus tiny remaining fare adjustment
+2026-06-01,income,Allowance,9000.0,Monthly family allowance
+2026-06-01,expense,Food,38.0,Late night noodles
+2026-06-01,expense,Rent,4200.0,Student residence rent
+2026-06-01,expense,Transport,21.0,Tram ride
+2026-06-02,expense,Coffee,42.0,Latte before lecture
+2026-06-02,expense,Food,45.0,Campus dinner
+2026-06-02,expense,Groceries,260.0,Household supplies
+2026-06-02,expense,Taxi,220.0,Late night taxi
+2026-06-02,expense,Transport,26.0,MTR to Central
+2026-06-02,expense,Travel,1800.0,Flight deposit
+2026-06-03,expense,Coffee,39.0,Iced americano
+2026-06-03,expense,Food,78.0,Convenience store meal
+2026-06-03,expense,Hotel,3500.0,Hotel deposit
+2026-06-03,expense,Transport,12.0,MTR to Central
+2026-06-04,expense,Food,78.0,Weekend brunch
+2026-06-04,expense,Food,138.0,Weekend brunch
+2026-06-04,expense,Groceries,220.0,Household supplies
+2026-06-04,expense,Insurance,450.0,Travel insurance
+2026-06-04,expense,Taxi,180.0,Taxi to presentation venue
+2026-06-04,expense,Transport,16.5,MTR to Central
+2026-06-05,expense,Coffee,36.0,Coffee with friend
+2026-06-05,expense,Food,52.0,Campus dinner
+2026-06-05,expense,Subscription,68.0,Spotify
+2026-06-05,expense,Transport,23.0,MTR to campus
+2026-06-06,expense,Coffee,48.0,Coffee with friend
+2026-06-06,expense,Food,65.0,Convenience store meal
+2026-06-06,expense,Food,138.0,Dinner with classmate
+2026-06-06,expense,Shopping,120.0,Shoes
+2026-06-06,expense,Subscription,93.0,Netflix
+2026-06-06,expense,Taxi,128.0,Rainy day taxi
+2026-06-06,expense,Transport,23.0,MTR to Central
+2026-06-07,expense,Food,65.0,Campus dinner
+2026-06-07,expense,Transport,21.0,MTR to Mong Kok
+2026-06-08,expense,Coffee,42.0,Cafe study session
+2026-06-08,expense,Food,28.0,Dinner with classmate
+2026-06-08,expense,Subscription,23.0,iCloud storage
+2026-06-08,expense,Transport,14.5,MTR to campus
+2026-06-09,expense,Coffee,39.0,Coffee with friend
+2026-06-09,expense,Food,45.0,Campus dinner
+2026-06-09,expense,Food,32.0,Dinner with classmate
+2026-06-09,expense,Food,112.0,McDonalds quick meal
+2026-06-09,expense,Photography,1180.0,Tripod accessory
+2026-06-09,expense,Transport,18.0,MTR to campus
+2026-06-10,expense,Coffee,32.0,Study coffee
+2026-06-10,expense,Entertainment,220.0,Karaoke with friends
+2026-06-10,expense,Food,96.0,Bubble tea and snack
+2026-06-10,expense,Food,32.0,McDonalds quick meal
+2026-06-10,expense,Shopping,520.0,Clothes
+2026-06-10,expense,Software,158.0,ChatGPT Plus
+2026-06-10,expense,Transport,8.5,MTR to campus
+2026-06-11,expense,Coffee,52.0,Cafe study session
+2026-06-11,expense,Food,78.0,Campus dinner
+2026-06-11,expense,Food,28.0,Sandwich before lecture
+2026-06-11,expense,Groceries,220.0,Fruit and breakfast food
+2026-06-11,expense,Printing,120.0,Online course fee
+2026-06-11,expense,Transport,18.0,Bus and MTR
+2026-06-12,expense,Food,45.0,Late night noodles
+2026-06-12,expense,Shopping,260.0,Backpack
+2026-06-12,expense,Software,120.0,Canva Pro
+2026-06-12,expense,Transport,16.5,MTR to Mong Kok
+2026-06-13,expense,Coffee,39.0,Cafe study session
+2026-06-13,expense,Food,28.0,McDonalds quick meal
+2026-06-13,expense,Transport,26.0,MTR to Mong Kok
+2026-06-14,expense,Food,52.0,Bubble tea and snack
+2026-06-14,expense,Food,138.0,Dinner with classmate
+2026-06-14,expense,Food,96.0,Dinner with classmate
+2026-06-15,income,Part-time Job,1500.0,Tutoring income
+2026-06-15,expense,Coffee,36.0,Study coffee
+2026-06-15,expense,Food,52.0,Bubble tea and snack
+2026-06-15,expense,Food,32.0,Weekend brunch
+2026-06-15,expense,Transport,26.0,Bus and MTR
+2026-06-16,expense,Coffee,32.0,Study coffee
+2026-06-16,expense,Food,138.0,Sandwich before lecture
+2026-06-16,expense,Transport,18.0,MTR to Mong Kok
+2026-06-17,expense,Coffee,42.0,Coffee with friend
+2026-06-17,expense,Food,96.0,Bubble tea and snack
+2026-06-17,expense,Food,32.0,Campus dinner
+2026-06-17,expense,Food,45.0,Late night noodles
+2026-06-17,expense,Transport,8.5,MTR to Central
+2026-06-18,expense,Coffee,52.0,Cafe study session
+2026-06-18,expense,Food,52.0,Convenience store meal
+2026-06-18,expense,Groceries,380.0,Fruit and breakfast food
+2026-06-18,expense,Transport,23.0,Bus to tutorial
+2026-06-19,expense,Coffee,52.0,Coffee with friend
+2026-06-19,expense,Food,112.0,Bubble tea and snack
+2026-06-19,expense,Transport,12.0,MTR to Mong Kok
+2026-06-20,expense,Food,88.0,Bubble tea and snack
+2026-06-20,expense,Food,28.0,Campus dinner
+2026-06-20,expense,Shopping,980.0,New luggage
+2026-06-20,expense,Transport,14.5,MTR to Central
+2026-06-21,expense,Coffee,39.0,Latte before lecture
+2026-06-21,expense,Food,52.0,Bubble tea and snack
+2026-06-22,expense,Food,45.0,Weekend brunch
+2026-06-22,expense,Transport,14.5,MTR to Central
+2026-06-23,expense,Food,88.0,Food delivery
+2026-06-23,expense,Food,38.0,Sandwich before lecture
+2026-06-23,expense,Groceries,310.0,Snacks and drinks
+2026-06-23,expense,Transport,23.0,MTR to Mong Kok
+2026-06-24,expense,Coffee,28.0,Iced americano
+2026-06-24,expense,Food,65.0,Food delivery
+2026-06-24,expense,Taxi,128.0,Rainy day taxi
+2026-06-24,expense,Transport,18.0,MTR to Mong Kok
+2026-06-25,expense,Coffee,45.0,Coffee with friend
+2026-06-25,expense,Food,78.0,Campus dinner
+2026-06-25,expense,Transport,12.0,MTR to Central
+2026-06-26,expense,Food,65.0,McDonalds quick meal
+2026-06-26,expense,Groceries,260.0,Weekly supermarket
+2026-06-26,expense,Transport,14.5,Bus to tutorial
+2026-06-27,expense,Coffee,45.0,Latte before lecture
+2026-06-27,expense,Food,38.0,Bubble tea and snack
+2026-06-28,expense,Coffee,39.0,Study coffee
+2026-06-28,expense,Food,65.0,HKU canteen lunch
+2026-06-29,expense,Food,65.0,Food delivery
+2026-06-29,expense,Transport,26.0,Bus to tutorial
+2026-06-30,income,Reimbursement,1.0,Tiny reimbursement test
+2026-06-30,expense,Coffee,42.0,Coffee with friend
+2026-06-30,expense,Food,138.0,Bubble tea and snack
+2026-06-30,expense,Transport,21.0,Bus and MTR
+2026-07-01,income,Allowance,9000.0,Monthly family allowance
+2026-07-01,expense,Coffee,28.0,Study coffee
+2026-07-01,expense,Food,88.0,Late night noodles
+2026-07-01,expense,Food,32.0,Weekend brunch
+2026-07-01,expense,Rent,4200.0,Student residence rent
+2026-07-01,expense,Shopping,520.0,Online shopping
+2026-07-01,expense,Transport,23.0,Bus to tutorial
+2026-07-02,expense,Coffee,32.0,Iced americano
+2026-07-02,expense,Entertainment,180.0,Karaoke with friends
+2026-07-02,expense,Food,32.0,Campus dinner
+2026-07-02,expense,Medical,380.0,Clinic visit
+2026-07-02,expense,Transport,8.5,MTR to campus
+2026-07-03,expense,Coffee,45.0,Latte before lecture
+2026-07-03,expense,Food,88.0,Food delivery
+2026-07-03,expense,Food,32.0,Sandwich before lecture
+2026-07-03,expense,Transport,26.0,Tram ride
+2026-07-04,expense,Food,96.0,Convenience store meal
+2026-07-04,expense,Groceries,260.0,Snacks and drinks
+2026-07-05,expense,Food,38.0,Dinner with classmate
+2026-07-05,expense,Subscription,68.0,Spotify
+2026-07-06,expense,Coffee,36.0,Iced americano
+2026-07-06,expense,Food,38.0,Dinner with classmate
+2026-07-06,expense,Food,96.0,Sandwich before lecture
+2026-07-06,expense,Subscription,93.0,Netflix
+2026-07-06,expense,Taxi,88.0,Taxi after group meeting
+2026-07-06,expense,Transport,12.0,MTR to campus
+2026-07-07,expense,Academic,780.0,Summer course material
+2026-07-07,expense,Coffee,39.0,Coffee with friend
+2026-07-07,expense,Entertainment,320.0,Dinner and movie
+2026-07-07,expense,Food,32.0,Food delivery
+2026-07-07,expense,Transport,8.5,Bus to tutorial
+2026-07-08,expense,Coffee,42.0,Iced americano
+2026-07-08,expense,Food,45.0,Convenience store meal
+2026-07-08,expense,Food,28.0,Dinner with classmate
+2026-07-08,expense,Food,112.0,Food delivery
+2026-07-08,expense,Subscription,23.0,iCloud storage
+2026-07-08,expense,Transport,8.5,MTR to Mong Kok
+2026-07-09,expense,Academic,120.0,Calculator accessory
+2026-07-09,expense,Coffee,52.0,Cafe study session
+2026-07-09,expense,Food,112.0,Bubble tea and snack
+2026-07-09,expense,Food,45.0,Convenience store meal
+2026-07-09,expense,Transport,8.5,MTR to Mong Kok
+2026-07-10,expense,Coffee,42.0,Study coffee
+2026-07-10,expense,Food,38.0,HKU canteen lunch
+2026-07-10,expense,Shopping,520.0,Phone cable
+2026-07-10,expense,Software,158.0,ChatGPT Plus
+2026-07-10,expense,Transport,12.0,Bus and MTR
+2026-07-11,expense,Academic,60.0,Past paper printing
+2026-07-11,expense,Coffee,48.0,Latte before lecture
+2026-07-11,expense,Entertainment,320.0,Board game cafe
+2026-07-11,expense,Food,65.0,Sandwich before lecture
+2026-07-11,expense,Groceries,260.0,Fruit and breakfast food
+2026-07-11,expense,Shopping,260.0,Backpack
+2026-07-11,expense,Taxi,220.0,Rainy day taxi
+2026-07-12,expense,Food,138.0,Dinner with classmate
+2026-07-12,expense,Software,120.0,Canva Pro
+2026-07-12,expense,Transport,26.0,MTR to Central
+2026-07-13,expense,Food,45.0,Convenience store meal
+2026-07-13,expense,Transport,16.5,MTR to campus
+2026-07-14,expense,Coffee,42.0,Latte before lecture
+2026-07-14,expense,Food,88.0,Bubble tea and snack
+2026-07-14,expense,Transport,21.0,MTR to Mong Kok
+2026-07-15,income,Part-time Job,1200.0,Tutoring income
+2026-07-15,expense,Coffee,28.0,Coffee with friend
+2026-07-15,expense,Food,96.0,Campus dinner
+2026-07-15,expense,Photography,720.0,Camera filter
+2026-07-15,expense,Transport,12.0,MTR to Central
+2026-07-16,expense,Coffee,36.0,Cafe study session
+2026-07-16,expense,Food,88.0,McDonalds quick meal
+2026-07-16,expense,Transport,8.5,Bus and MTR
+2026-07-17,expense,Coffee,42.0,Study coffee
+2026-07-17,expense,Food,52.0,Sandwich before lecture
+2026-07-17,expense,Transport,21.0,MTR to Central
+2026-07-18,expense,Coffee,36.0,Cafe study session
+2026-07-18,expense,Food,96.0,McDonalds quick meal
+2026-07-18,expense,Groceries,450.0,Snacks and drinks
+2026-07-18,expense,Shopping,180.0,Clothes
+2026-07-18,expense,Shopping,1280.0,Clothes and shoes
+2026-07-19,expense,Coffee,45.0,Study coffee
+2026-07-19,expense,Food,28.0,Convenience store meal
+2026-07-19,expense,Food,138.0,Dinner with classmate
+2026-07-19,expense,Groceries,450.0,Household supplies
+2026-07-20,expense,Coffee,42.0,Study coffee
+2026-07-20,expense,Food,28.0,HKU canteen lunch
+2026-07-20,expense,Transport,12.0,Tram ride
+2026-07-21,expense,Food,96.0,Sandwich before lecture
+2026-07-21,expense,Food,112.0,Weekend brunch
+2026-07-21,expense,Shopping,380.0,Backpack
+2026-07-21,expense,Taxi,108.0,Taxi after group meeting
+2026-07-21,expense,Transport,18.0,MTR to Central
+2026-07-22,income,Reimbursement,300.0,Friend paid me back
+2026-07-22,expense,Food,28.0,HKU canteen lunch
+2026-07-22,expense,Transport,26.0,MTR to Mong Kok
+2026-07-23,expense,Food,78.0,Convenience store meal
+2026-07-23,expense,Transport,8.5,MTR to campus
+2026-07-24,expense,Coffee,28.0,Study coffee
+2026-07-24,expense,Entertainment,680.0,Theme park ticket
+2026-07-24,expense,Food,96.0,Bubble tea and snack
+2026-07-24,expense,Food,28.0,McDonalds quick meal
+2026-07-24,expense,Transport,8.5,MTR to Central
+2026-07-25,expense,Food,96.0,Bubble tea and snack
+2026-07-26,expense,Academic,120.0,Textbook purchase
+2026-07-26,expense,Coffee,52.0,Cafe study session
+2026-07-26,expense,Food,38.0,Bubble tea and snack
+2026-07-26,expense,Groceries,380.0,Weekly supermarket
+2026-07-27,expense,Food,78.0,Bubble tea and snack
+2026-07-27,expense,Food,88.0,Late night noodles
+2026-07-27,expense,Transport,26.0,Tram ride
+2026-07-28,expense,Entertainment,120.0,Concert ticket
+2026-07-28,expense,Food,65.0,Dinner with classmate
+2026-07-28,expense,Food,52.0,Dinner with classmate
+2026-07-28,expense,Transport,8.5,Tram ride
+2026-07-29,expense,Food,96.0,Campus dinner
+2026-07-29,expense,Food,32.0,Weekend brunch
+2026-07-29,expense,Taxi,220.0,Late night taxi
+2026-07-29,expense,Transport,8.5,Tram ride
+2026-07-30,expense,Coffee,32.0,Iced americano
+2026-07-30,expense,Food,78.0,Campus dinner
+2026-07-30,expense,Food,96.0,Dinner with classmate
+2026-07-30,expense,Food,112.0,Sandwich before lecture
+2026-07-30,expense,Taxi,180.0,Rainy day taxi
+2026-07-30,expense,Transport,18.0,MTR to campus
+2026-07-31,expense,Food,32.0,Campus dinner
+2026-07-31,expense,Food,45.0,Dinner with classmate
+2026-07-31,expense,Food,199.99,Large decimal dinner bill split
+2026-07-31,expense,Shopping,120.0,Online shopping
+2026-07-31,expense,Transport,18.0,MTR to campus

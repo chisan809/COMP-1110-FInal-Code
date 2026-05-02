@@ -1,0 +1,52 @@
+date,type,category,amount,description
+2026-05-01,income,Allowance,12000.0,Monthly allowance
+2026-05-02,expense,Hotel,3500.0,Hotel deposit
+2026-05-03,expense,Travel,1800.0,Flight deposit
+2026-05-04,expense,Insurance,450.0,Travel insurance
+2026-05-05,expense,Photography,720.0,Camera filter
+2026-05-06,expense,Photography,1180.0,Tripod accessory
+2026-05-07,expense,Transport,300.0,Airport Express top up
+2026-05-08,expense,Food,160.0,Dinner during trip planning
+2026-05-09,expense,Food,88.0,Lunch
+2026-05-10,expense,Shopping,650.0,Travel clothing
+2026-05-11,expense,Shopping,980.0,New luggage
+2026-05-12,expense,Entertainment,950.0,Farewell dinner before trip
+2026-05-13,expense,Food,120.0,Dinner after itinerary planning
+2026-05-14,expense,Transport,85.0,Taxi to collect luggage
+2026-05-15,expense,Photography,360.0,Memory card
+2026-05-16,expense,Travel,420.0,Seat selection and baggage add-on
+2026-05-17,expense,Insurance,180.0,Extra travel coverage
+2026-05-18,expense,Shopping,520.0,Travel adapter and toiletries
+2026-05-19,expense,Food,95.0,Cafe during planning
+2026-05-20,expense,Entertainment,380.0,Dinner with friends before trip
+2026-05-21,expense,Transport,130.0,Taxi after shopping
+2026-05-22,expense,Food,78.0,Lunch
+2026-05-23,expense,Shopping,430.0,Shoes for trip
+2026-05-24,expense,Photography,580.0,Camera strap and filter
+2026-05-25,income,Reimbursement,600.0,Friend paid hotel share
+2026-05-26,expense,Travel,260.0,Local tour deposit
+2026-05-27,expense,Food,145.0,Weekend dinner
+2026-05-28,expense,Transport,26.0,MTR
+2026-05-29,expense,Hotel,1200.0,Second hotel deposit
+2026-05-30,expense,Entertainment,220.0,Movie night
+2026-05-31,expense,Food,118.0,Last dinner before trip
+2026-06-01,income,Allowance,12000.0,Monthly allowance
+2026-06-02,expense,Travel,1600.0,Remaining flight payment
+2026-06-03,expense,Hotel,2800.0,Hotel final payment
+2026-06-04,expense,Food,260.0,Airport meal and snacks
+2026-06-05,expense,Transport,420.0,Airport transport
+2026-06-06,expense,Food,380.0,Trip day meals
+2026-06-07,expense,Entertainment,1100.0,Theme park ticket
+2026-06-08,expense,Shopping,780.0,Souvenirs
+2026-06-09,expense,Photography,650.0,Camera cleaning and accessories
+2026-06-10,expense,Transport,520.0,Taxi and local transport
+2026-06-11,expense,Food,420.0,Seafood dinner
+2026-06-12,expense,Travel,900.0,Local tour
+2026-06-13,expense,Hotel,1500.0,Extra night hotel
+2026-06-14,expense,Shopping,640.0,Gifts
+2026-06-15,income,Reimbursement,900.0,Friend paid trip share
+2026-06-16,expense,Food,240.0,Dinner after return
+2026-06-17,expense,Transport,160.0,Taxi home with luggage
+2026-06-18,expense,Insurance,80.0,Claim document fee
+2026-06-19,expense,Photography,300.0,Photo printing
+2026-06-20,expense,Entertainment,450.0,Post-trip dinner
