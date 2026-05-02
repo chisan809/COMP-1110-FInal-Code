@@ -6,11 +6,10 @@ Stress-test large CSV import, many categories, multi-month reports, large one-of
 ## Demo flow
 1. Choose option `6`: Import Transactions from CSV.
 2. Type:
-   `scenario1_studentSpending_stressTest_transactions.csv`
+   `scenario1_hku_student.csv`
 3. Choose option `2`: Monthly Report.
 4. Select the month you want to view.
 5. Explain total income, total expenses, net balance, global limit warning, category budget warnings, and text chart.
-6. No recurring setup is required. Optional: import scenario1_dirty_rows_for_validation.csv to test invalid-row handling.
 
 ## Expected result summary
 Global monthly limit: $11500.00
